@@ -6,5 +6,5 @@ a.out
 *.o
 *.exe
 .DS_Store
-file
-warmup_copy
+file.cpp
+warmup_copy.cpp
