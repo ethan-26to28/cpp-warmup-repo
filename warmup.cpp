@@ -1,14 +1,3 @@
-
-// =====================================================================
-//  C++ WARM-UP  ·  African Olympiad Academy
-//
-//  The question descriptions are in README.md.
-//  This file holds the data, one worked example, and your answers.
-//
-//  BUILD AND RUN:   g++ -std=c++17 -Wall -o run warmup.cpp && ./run
-//            or:    ./run.sh
-// =====================================================================
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,27 +6,18 @@
 #include <stdexcept>
 using namespace std;
 
-/**
- * THE RECORD
- * One delivery: who brought it, how much, and what grade it was given.
- */
+// Here is where I leave the declaration of some of the variables.
+// Most of tese variables are not mine, they are just the variables I found in the original code you gave us.
 struct Delivery {
     string farmer;
     double kg;
     char grade;
 };
 
-/**
- * THE DATA
- * Do not change these. Every expected answer in the README comes from exactly this data.
- */
-
-// Q1 — one morning's weights, in the order they were weighed
 vector<double> morningWeights = {
     45.5, 80.0, 12.0, -3.0, 66.5, 20.0, 31.0, 95.0, 50.0, 18.5, 0.0, 72.0
 };
 
-// Q2, Q3, Q4, Q7, Q8 — the day's logbook
 vector<Delivery> logbook = {
     {"Keza",    45.5, 'A'},
     {"Bonu",    80.0, 'B'},
@@ -50,12 +30,11 @@ vector<Delivery> logbook = {
     {"Bonu",    50.0, 'C'},
     {"Isanda",  20.0, 'A'},
     {"Onyinye", 72.0, 'A'}
-};   // yes, one of these rows is in here twice. Q8 is about that.
+};  
 
-// Q5 — records as the volunteers typed them, before any checking.
 struct RawRecord {
     string id;
-    string kg;        // text, because a volunteer can type anything
+    string kg;       
     char grade;
 };
 
@@ -70,23 +49,29 @@ vector<RawRecord> rawRecords = {
     {"F077", "92",    'B'}
 };
 
-// Q6 — an Igisoro board. 16 pits, in sowing order.
-// Position 0 is unused so that board[1] really is pit 1.
 vector<int> board = {0, 0, 0, 1, 0, 0, 4, 1, 0, 0, 2, 2, 0, 1, 5, 0, 0};
 
-// Helper
+// The function you called "helper"...
 void printBoard(const vector<int> &b) {
     for (int i = 1; i <= 16; i++) cout << b[i] << " ";
     cout << "\n";
 }
 
-/////////////////////Check this...
-// Function declarations: main() needs to know these functions exist.
-int findFarmer(const vector<Delivery> &log, string name);
+//Function to find farmer on Q3
+int findFarmer(const vector<Delivery> &log, string name) {
+    for (int i = 0; i < log.size(); i++) {
+        if (log[i].farmer == name) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 double payment(double kg, char grade);
+//End of variable declarations and stuff, for now
 
 int main() {
-
     // WORKED EXAMPLE
     int gradeACount = 0;
     Delivery heaviest = logbook[0];
@@ -100,14 +85,10 @@ int main() {
         }
     }
 
-    cout << "=== Worked example ===\n";
-    cout << "Grade A deliveries: " << gradeACount << "\n";
-    cout << "Heaviest: " << heaviest.farmer << " with "
-         << heaviest.kg << " kg\n\n";
+    cout << "I removed the worked example outputs... don't be surprised to not see it.\n "; 
 
-    // Q1 — THE WEIGHING SESSION
+    // Q1
     cout << "=== Q1 ===\n";
-
     double total = 0;
     int validCount = 0;
     double heaviestWeight = morningWeights[0];
@@ -115,11 +96,9 @@ int main() {
     int currentRun = 0;
     int longestRun = 0;
 
-    for (int i = 0; i < static_cast<int>(morningWeights.size()); i++) {
+    for (int i = 0; i < (morningWeights.size()); i++) {
         double weight = morningWeights[i];
-
         total += weight;
-
         if (weight > heaviestWeight) {
             heaviestWeight = weight;
             heaviestPosition = i;
@@ -143,7 +122,7 @@ int main() {
          << " kg at position " << heaviestPosition << "\n";
     cout << "Longest valid run: " << longestRun << "\n\n";
 
-    // Q2 — GRADE SUMMARY solution stuff....
+    // Q2 — Grade summary solution stuff....
     cout << "=== Q2 ===\n";
 
     char grades[] = {'A', 'B', 'C'};
@@ -169,10 +148,7 @@ int main() {
             average = gradeTotals[i] / gradeCounts[i];
         }
 
-        cout << "Grade " << grades[i] << ": "
-             << gradeCounts[i] << " deliveries, "
-             << gradeTotals[i] << " kg total, "
-             << average << " kg average\n";
+        cout << "Grade " << grades[i] << ": "<< gradeCounts[i] << " deliveries, "<< gradeTotals[i] << " kg total, "<< average << " kg average\n";
 
         if (gradeCounts[i] > 0 && average > bestAverage) {
             bestAverage = average;
@@ -195,7 +171,7 @@ int main() {
     for (Delivery d : logbook) {
         int index = -1;
 
-        for (int i = 0; i < static_cast<int>(farmers.size()); i++) {
+        for (int i = 0; i < (farmers.size()); i++) {
             if (farmers[i] == d.farmer) {
                 index = i;
                 break;
@@ -206,7 +182,7 @@ int main() {
             farmers.push_back(d.farmer);
             farmerCounts.push_back(0);
             farmerTotals.push_back(0);
-            index = static_cast<int>(farmers.size()) - 1;
+            index = (farmers.size()) - 1;
         }
 
         farmerCounts[index]++;
@@ -216,7 +192,8 @@ int main() {
     int mostDeliveriesIndex = 0;
     int mostKgIndex = 0;
 
-    for (int i = 1; i < static_cast<int>(farmers.size()); i++) {
+    for (int i = 1; i < 
+        (farmers.size()); i++) {
         if (farmerCounts[i] > farmerCounts[mostDeliveriesIndex]) {
             mostDeliveriesIndex = i;
         }
