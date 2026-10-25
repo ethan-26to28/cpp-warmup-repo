@@ -1,3 +1,2 @@
-Ethan Cpp warmup stuff
+Ethan Cpp warmup assignment:
  Had originally submitted and made commits but apparently they didn't get sent online because I forgot that I also had to push after commit...
- 
